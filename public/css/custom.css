@@ -1,0 +1,233 @@
+.textcolor p{
+    padding: 0;
+    margin-bottom: 12px;
+    font-family: 'Ruda', sans-serif !important;
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 24px;
+    color: #39b3a5;
+    margin-top: 200px;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #777777;
+    text-align: center;
+    padding: 24px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: rgba(51,145,144,0.89);
+    color: white;
+}
+
+/* Right-aligned section inside the top navigation */
+    .topnav-right {
+    float: right;
+}
+i.dm-icon {
+    background: #ecf0f1;
+    color: #000;
+}
+i.dm-icon:hover {
+    background: #39b3a5;
+    color: #ffffff;
+}
+.servicetitle hr {
+    background-color: #9E9E9E !important;
+    height: 2px;
+    width: 20%;
+}
+.servicetitle h4 {
+    color: #4dcbbd;
+}
+.servicetitle h5 {
+    color: #000;
+    font-size: 150%;
+}
+.pricing li:before {
+    display: none;
+}
+.footer .contact_details li {
+    border-bottom: 1px solid #1a2636;
+}
+.social_cons {
+    margin: 1em 0;
+}
+.pricing li {
+    width: 100%;
+    border: 0;
+    font-size: 18px;
+    padding: 1rem;
+    border-bottom: 2px solid #ffffff;
+}
+.footer .widget h4 span {
+    padding: 0 1em;
+    border-left: 5px solid #4dcbbd;
+}
+.footer p {
+    color: #fff;
+}
+.custom-box {
+    padding: 0 0 35px;
+    border: 1px solid #ffffff;
+    background: #eaebed;
+}
+.custom-box .icn-main-container {
+    padding: 20px 20px 25px;
+    background-image: linear-gradient( 270deg, #339191 25%, #4dcbbd 100%);
+}
+span.icn-container {
+    width: 100%;
+    height: 100%;
+    font-size: 5em;
+}
+span.icn-container, .icn-container:hover {
+    background: none !important;
+}
+.ss_pricing .col-lg-4 {
+    padding: 0;
+}
+span.icn-container.sub {
+    font-size: 2em;
+    width: 100%;
+    line-height: 0px;
+    font-weight: 100 !important;
+    margin: 0;
+}
+.pricing li:nth-child(even) {
+    background-color: #eaebed;
+}
+.ss_pricing a.btn.btn-primary {
+    background: #4dcbbd;
+    border: 0;
+    border-bottom: 2px solid #21a294;
+    border-radius: 0;
+    font-size: 2rem;
+    padding: 1rem 3rem;
+}
+.pricing li:nth-child(odd) {
+    background-color: #ecf0f1;
+}
+ul.pricing {
+    padding-top: 0;
+}
+.ss_pricing .col-lg-4:nth-child(2)  a.btn.btn-primary {
+    background: #000;
+    border-bottom: 2px solid #000000;
+}
+.ss_pricing .col-lg-4:nth-child(2) .custom-box .icn-main-container {
+    padding: 40px 20px 25px;
+    margin-top: -20px;
+}
+.section5 .container {
+    display: flex;
+    align-items: flex-end;
+}
+.section5 .textcolor p {
+    margin: 0;
+    margin-bottom: 15px;
+}
+.section5 .widget.clearfix {
+    margin: 0;
+    padding: 0;
+}
+a.dmbutton.button.large.pull-left {
+    background-color: transparent;
+}
+
+.contact-form button, .contact-form .button {
+    background-color: #4dcbbd;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #21a294;
+    padding: 1rem;
+}
+section.contact h1 {
+    color: #000;
+    margin: 0;
+}
+section.contact p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #000;
+}
+ul.contact_details li a {
+    margin: 10px 0;
+    color: #fff;
+    display: block;
+}
+.ss_pricing .banner-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+.ss_pricing .banner {
+    width: 215px;
+    padding: 15px;
+    background-color: #ffc107;
+    color: #fff;
+    text-align: center;
+    -webkit-transform: rotate(-45deg) translate(-28%, -35%);
+    transform: rotate(45deg) translate(6%, 67%);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+    text-transform: uppercase;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+}
+.ss_pricing .banner-container:before {
+    content: "";
+    display: block;
+    height: 10px;
+    width: 5px;
+    background-color: #67951a;
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    z-index: -1;
+}
+.ss_pricing .banner-container:after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 5px;
+    background-color: #67951a;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.modal-title {
+    display: inline-block;
+    margin-top: 0;
+}
+button.close:hover {
+    background: none;
+}
+@media (min-width: 768px) {
+    .site-header.clearfix {
+        display: flex;
+        align-items: center;
+    }
+    #nav .container {
+        width: inherit;
+        float: right;
+    }
+}
