@@ -375,6 +375,38 @@ tr.danger {
     text-decoration: line-through;
     color: #6c757d;
 }
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #4dccbd;
+    background-color: #4dccbd;
+}
+
+.custom-switch .custom-control-label::before {
+    left: -2.25rem;
+    width: 2rem;
+    pointer-events: all;
+    border-radius: .75rem;
+    height: 1.15rem;
+}
+.custom-switch .custom-control-input:checked~.custom-control-label::after {
+    -webkit-transform: translateX(0.9rem);
+    transform: translateX(0.9rem);
+}
+.custom-switch .custom-control-label::after{
+    width: calc(1.15rem - 4px);
+    height: calc(1.15rem - 4px);
+}
+.progress-bar{
+    background-color: #4dccbd;
+}
+.title-area {
+    padding: 0;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+.un-answered{
+    display: none;
+}
 @media only screen and (min-width: 1025px) {
     table.test-questions  {
         word-break: break-word;
@@ -431,5 +463,9 @@ only screen and (max-width: 760px),
 @media only screen and (max-width: 475px) {
     .top-card p.question {
         display: none;
+    }
+    .btn-sm-block {
+        display: block;
+        width: 100%;
     }
 }

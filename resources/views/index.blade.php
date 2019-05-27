@@ -336,7 +336,7 @@
 
                     <div class="form-group">
                         {!! Form::label('message1', 'message') !!}
-                        {!! Form::textarea('message1', null, ['class' => 'form-control' , 'placeholder'=>'Please write something for us']) !!}
+                        {!! Form::textarea('message1', null, ['class' => 'form-control' , 'placeholder'=>'Drop us a line here']) !!}
                     </div>
                     <div class="form-send">
                         {!! Form::submit('Submit', ['class' => 'button btn btn-large btn-primary']) !!}

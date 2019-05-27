@@ -1,7 +1,11 @@
 @extends('layouts.app')
 @section('styles')
     <style>
-
+        @if(!$learn_mode)
+        .alert {
+            display: none;
+        }
+        @endif
     </style>
 @endsection
 
@@ -17,6 +21,7 @@
                             <div class="mt-0">
                                 <div class="col-md-12">
                                     <div class="questtions-label page-heading">Online Test</div>
+                                    <div class="un-answered">you have <span>x</span> unanswered questions</div>
 
                                     @if(!empty($counter))
                                         <div class="text-right">
@@ -39,17 +44,17 @@
                                                        value="{{ $answered_count }}">
                                                 <input type="hidden" name="timer_left" id="timer-left">
                                                 @if($questions->count() > 1)
-                                                <div class="text-right">
-                                                    <button class="w-auto exit-btn btn btn-outline-danger btn-rounded m-0 waves-effect z-depth-0"
+                                                <div class="text-md-right">
+                                                    <button class="w-md-auto exit-btn btn btn-outline-danger btn-rounded m-0 mb-2 btn-sm-block waves-effect z-depth-0"
                                                             type="submit" name="save" value="save">SAVE & EXIT
                                                     </button>
                                                 </div>
                                                 @endif
 
                                                 @foreach($questions as $key => $set)
-                                                    <div class="question-answer {{ $key == 0  ? 'active' : ''}}">
+                                                    <div class="question-answer {{ $key == 0  ? 'active' : ''}}" id="question-{{ $set->id }}">
                                                         <div class="question">{!! $set->question !!}</div>
-                                                        <input type="hidden" name="question_id[]"
+                                                        <input type="hidden" class="question-input" name="question_id[]"
                                                                value="{{ $set->id }}">
                                                         <div class="options mt-2">
                                                             <!-- Default unchecked -->
@@ -62,7 +67,7 @@
                                                             @foreach($option_keys as $option_key)
                                                                 <div class="custom-control custom-radio my-2">
                                                                     <input type="radio"
-                                                                           class="custom-control-input option"
+                                                                           class="custom-control-input option {{ $option_key }}"
                                                                            name="option_{{ $set->id }}"
                                                                            value="{{ $option_key }}">
                                                                     <label class="custom-control-label">{!! $options[$option_key] !!}</label>
@@ -130,22 +135,105 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="unAnsQuesModal" tabindex="-1" role="dialog" aria-labelledby="unAnsQuesModal"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
 
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="unAnsQuesModalLable">Unanswered Questions</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="question-answer">
+                        <div class="question"></div>
+                        <input type="hidden" class="question-input" name="question_id[]" value="">
+                        <div class="options mt-2">
+                            <!-- Default unchecked -->
+                            <div class="custom-control custom-radio my-2">
+                                <input type="radio"
+                                       class="custom-control-input option option1"
+                                       name="option_0"
+                                       value="option1">
+                                <label class="custom-control-label">Option 1</label>
+
+                                <div class="alert alert-success"
+                                     role="alert">
+                                    <strong></strong> <span></span>
+                                </div>
+
+                            </div>
+                            <div class="custom-control custom-radio my-2">
+                                <input type="radio"
+                                       class="custom-control-input option option2"
+                                       name="option_0"
+                                       value="option2">
+                                <label class="custom-control-label">Option 2</label>
+
+                                <div class="alert alert-success"
+                                     role="alert">
+                                    <strong></strong> <span></span>
+                                </div>
+
+                            </div>
+                            <div class="custom-control custom-radio my-2">
+                                <input type="radio"
+                                       class="custom-control-input option option3"
+                                       name="option_0"
+                                       value="option3">
+                                <label class="custom-control-label">Option 3</label>
+
+                                <div class="alert alert-success"
+                                     role="alert">
+                                    <strong></strong> <span></span>
+                                </div>
+
+                            </div>
+
+                            <div class="custom-control custom-radio my-2">
+                                <input type="radio"
+                                       class="custom-control-input option option4"
+                                       name="option_0"
+                                       value="option4">
+                                <label class="custom-control-label">Option 4</label>
+
+                                    <div class="hint alert alert-success"
+                                         role="alert">
+                                        <strong></strong> <span></span>
+                                    </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between d-flex flex-row-reverse">
+                    <button class="w-auto next-modal-btn btn btn-outline-theme btn-rounded my-4 waves-effect z-depth-0"
+                            type="button">Next Question
+                    </button>
+                    <button class="w-auto submit-modal-btn btn btn-outline-theme btn-rounded my-4 waves-effect z-depth-0 hide"
+                            type="button" name="submit" value="submit">Submit Test
+                    </button>
+
+                    <button class="w-auto prev-modal-btn btn btn-outline-theme btn-rounded my-4 waves-effect z-depth-0 hide"
+                            type="button">Previous Question
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 @endsection
 @section('scripts')
     <script>
         jQuery(document).ready(function () {
-            @if(empty($learn_mode))
-            jQuery(document).on('change', '.question-answer .options input.option', function () {
-                var checked = jQuery(this).is(':checked');
-                if (checked) {
-                    jQuery(this).parents('.question-answer .options').find('.custom-control.custom-radio').addClass('disabled');
-                } else {
-                    jQuery(this).parents('.question-answer .options').find('.custom-control.custom-radio').removeClass('disabled');
-                }
-            });
-            @endif
-            jQuery(document).on('click', '.test-questions .question-answer label.custom-control-label', function () {
+
+            jQuery(document).on('click', '.question-answer label.custom-control-label', function () {
                 jQuery(this).toggleClass('strike');
                 if (jQuery(this).hasClass('strike')) {
                     jQuery(this).siblings('.custom-control-input').attr('disabled', 'disabled');
@@ -155,6 +243,19 @@
             })
             jQuery(document).on('click', 'button.next-btn.btn', function () {
                 var $currentItem = jQuery('.test-questions .question-answer.active');
+
+                var count = 0;
+                var $prevQuestion = $currentItem.prevAll('.question-answer');
+                $prevQuestion.each(function(ind, val){
+                    count += jQuery(val).find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
+                });
+                count += $currentItem.find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
+                if(count >0) {
+                    jQuery('.un-answered span').text(count);
+                    jQuery('.un-answered').show();
+                }else{
+                    jQuery('.un-answered').hide();
+                }
                         @if($learn_mode)
                 var $nextItem = $currentItem.next('.question-answer');
                 $currentItem.removeClass('active');
@@ -173,7 +274,7 @@
                 jQuery('.progress-bar').css('width', progress_count + '%');
                 jQuery('.progress-bar').attr('aria-valuenow', progress_count);
                 @else
-                if ($currentItem.find('input.option:checked').length) {
+
                     var $nextItem = $currentItem.next('.question-answer');
                     $currentItem.removeClass('active');
                     $nextItem.addClass('active');
@@ -190,13 +291,24 @@
                     var progress_count = (current_ques / question_count) * 100;
                     jQuery('.progress-bar').css('width', progress_count + '%');
                     jQuery('.progress-bar').attr('aria-valuenow', progress_count);
-                } else {
-                    alert('Please select any option');
-                }
+
                 @endif
+
+
             });
             jQuery(document).on('click', 'button.prev-btn.btn', function () {
                 var $currentItem = jQuery('.test-questions .question-answer.active');
+                var count = 0;
+                var $prevQuestion = $currentItem.prevAll('.question-answer');
+                $prevQuestion.each(function(ind, val){
+                    count += jQuery(val).find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
+                });
+                if(count >0) {
+                    jQuery('.un-answered span').text(count);
+                    jQuery('.un-answered').show();
+                }else{
+                    jQuery('.un-answered').hide();
+                }
                         @if($learn_mode)
                     var $nextItem = $currentItem.prev('.question-answer');
                     $currentItem.removeClass('active');
@@ -215,7 +327,7 @@
                     jQuery('.progress-bar').css('width', progress_count + '%');
                     jQuery('.progress-bar').attr('aria-valuenow', progress_count);
                 @else
-                if ($currentItem.find('input.option:checked').length) {
+
                     var $nextItem = $currentItem.prev('.question-answer');
                     $currentItem.removeClass('active');
                     $nextItem.addClass('active');
@@ -232,26 +344,125 @@
                     var progress_count = (current_ques / question_count) * 100;
                     jQuery('.progress-bar').css('width', progress_count + '%');
                     jQuery('.progress-bar').attr('aria-valuenow', progress_count);
-                } else {
-                    alert('Please select any option');
-                }
+
                 @endif
             });
-
+            var questions = [];
             jQuery(document).on('click', 'button.submit-btn.btn, button.exit-btn.btn', function () {
+                questions = [];
                 var $currentItem = jQuery('.test-questions .question-answer.active');
-                if ($currentItem.find('input.option:checked').length) {
 
-                } else {
-                    @if(empty($learn_mode))
-                    alert('Please select any option');
+                var count = 0;
+
+                var $prevQuestion = $currentItem.prevAll('.question-answer');
+                if($currentItem.find('.options .custom-control-input:checked').length == 0){
+                    count += 1;
+                    questions.push($currentItem.find('.question-input').val());
+                }
+                $prevQuestion.each(function(ind, val){
+                    if(jQuery(val).find('.options .custom-control-input:checked').length == 0){
+                        count += 1;
+                        questions.push(jQuery(val).find('.question-input').val());
+                    }
+                    //count += jQuery(val).find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
+                });
+
+                console.log(questions);
+                questions = questions.reverse();
+                if(count >0) {
+                    var question = jQuery('#question-'+questions[0]+' .question').text();
+                    var options = jQuery('#question-'+questions[0]+' .options').html();
+
+
+                    jQuery('.submit-modal-btn, .prev-modal-btn').addClass('hide');
+                    jQuery('.next-modal-btn').removeClass('hide');
+                    jQuery('#unAnsQuesModal .question-input').val(questions[0]);
+                    jQuery('#unAnsQuesModal .question-answer .question').text(question);
+
+                    jQuery('#unAnsQuesModal .question-answer .options').html(options);
+                    jQuery('#unAnsQuesModal').modal('show');
+                    if(count > 1) {
+                        jQuery('#unAnsQuesModal .submit-modal-btn').addClass('hide');
+                    }else{
+                        jQuery('#unAnsQuesModal .submit-modal-btn').removeClass('hide');
+                    }
                     return false;
-                    @endif
+                }else{
+
                 }
             });
 
+            jQuery(document).on('click','#unAnsQuesModal .next-modal-btn', function () {
+                var currentQues = jQuery('#unAnsQuesModal .question-input').val();
+                var currentInd = questions.indexOf(currentQues);
+                if(jQuery('#unAnsQuesModal .question-answer .options .custom-control-input:checked').length <= 0){
+                    alert('Please select a option');
+                    return false
+                }
+                var question = jQuery('#question-'+questions[currentInd+1]+' .question').text();
+                var options = jQuery('#question-'+questions[currentInd+1]+' .options').html();
 
-        })
+                jQuery('#unAnsQuesModal .question-input').val(questions[currentInd+1]);
+                jQuery('#unAnsQuesModal .question-answer .question').text(question);
+
+                jQuery('#unAnsQuesModal .question-answer .options').html(options);
+                if((questions.length - 1) <= currentInd + 1){
+                    jQuery('#unAnsQuesModal .next-modal-btn').addClass('hide');
+                    jQuery('#unAnsQuesModal .submit-modal-btn').removeClass('hide');
+                }
+                jQuery('#unAnsQuesModal .prev-modal-btn').removeClass('hide');
+
+                jQuery()
+
+            });
+
+            jQuery(document).on('click','#unAnsQuesModal .prev-modal-btn', function () {
+                var currentQues = jQuery('#unAnsQuesModal .question-input').val();
+                var currentInd = questions.indexOf(currentQues);
+
+                var question = jQuery('#question-'+questions[currentInd-1]+' .question').text();
+                var options = jQuery('#question-'+questions[currentInd-1]+' .options').html();
+
+                jQuery('#unAnsQuesModal .question-input').val(questions[currentInd-1]);
+                jQuery('#unAnsQuesModal .question-answer .question').text(question);
+
+                jQuery('#unAnsQuesModal .question-answer .options').html(options);
+                jQuery('#unAnsQuesModal .next-modal-btn').removeClass('hide');
+                if(currentInd - 1 == 0){
+                    jQuery('#unAnsQuesModal .prev-modal-btn').addClass('hide');
+                }
+                jQuery('#unAnsQuesModal .submit-modal-btn').addClass('hide');
+
+            });
+
+            jQuery(document).on('change', '.question-answer .options .custom-control-input', function(){
+                var $currentItem = jQuery('.test-questions .question-answer.active');
+                console.log($currentItem.prevAll('.question-answer'));
+                var count = 0;
+                var $prevQuestion = $currentItem.prevAll('.question-answer');
+                $prevQuestion.each(function(ind, val){
+                    count += jQuery(val).find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
+                });
+                count += $currentItem.find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
+                if(count >0) {
+                    jQuery('.un-answered span').text(count);
+                    jQuery('.un-answered').show();
+                }else{
+                    jQuery('.un-answered').hide();
+                }
+            })
+
+        });
+
+        jQuery(document).on('change', '#unAnsQuesModal .question-answer .options .custom-control-input', function(){
+            var curVal = jQuery(this).val();
+            var question_id = jQuery(this).parents('#unAnsQuesModal').find('.question-input').val();
+            jQuery('#question-'+question_id+' .options .custom-control-input.'+curVal).prop("checked", true);
+        });
+
+        jQuery(document).on('click','#unAnsQuesModal .submit-modal-btn', function () {
+            jQuery('.submit-btn').click();
+        });
                 @if(!empty($counter))
         var endDate = '{{ $counter }}';
 

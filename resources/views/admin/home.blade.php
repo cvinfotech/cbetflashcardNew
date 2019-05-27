@@ -81,7 +81,7 @@
                                             <tr>
                                                 <td data-title="Card Number">{{ $key_card + 1 }}</td>
                                                 <td data-title="Category">{{ getCategory($card->cat_id) }}</td>
-                                                <td data-title="Question">{{ $card->question }}</td>
+                                                <td data-title="Question">{!! $card->question !!}</td>
                                                 <td data-title="Question Image">{!! !empty($card->image_question) ? '<img src="'.asset('uploads/'.$card->image_question).'" height="70">' : '' !!}</td>
                                                 <td data-title="Answer">{!! $card->answer !!}</td>
                                                 <td data-title="Answer Image">{!! !empty($card->image_answer) ? '<img src="'.asset('uploads/'.$card->image_answer).'" height="70">' : '' !!}</td>

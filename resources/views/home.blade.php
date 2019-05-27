@@ -79,7 +79,7 @@
                                                                         <div class="top-card"></div>
                                                                         <div class="middle-card">
                                                                             {!! !empty($card->image_question) ? '<img src="'.asset('uploads/'.$card->image_question).'" height="150">' : '' !!}
-                                                                            <div class="question">{{ $card->question }}</div>
+                                                                            <div class="question">{!! $card->question !!}</div>
                                                                         </div>
                                                                         <div class="bottom-card"></div>
 
@@ -88,7 +88,7 @@
                                                                         {!! !empty($card->image_answer) ? '<div class="top-card with_img"><p class="question">'.$card->question.'</p><img src="'.asset('uploads/'.$card->image_answer).'" height="150"></div>' : '<div class="top-card"> <p class="question">'.$card->question.'</p></div>' !!}
                                                                         <div class="middle-card">
                                                                             <div class="answer"><i
-                                                                                        class="fas fa-arrow-right"> </i>&nbsp;{{ $card->answer }}
+                                                                                        class="fas fa-arrow-right"> </i>&nbsp;{!! $card->answer !!}
                                                                             </div>
                                                                         </div>
                                                                         <div class="bottom-card">{!! $card->citation ? '<a href="javascript:void(0)" data-toggle="popover" data-placement="top" title="Reference Information" data-content="'.htmlentities($card->citation).'" data-html="true" >Reference information</a>' : '' !!}</div>

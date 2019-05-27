@@ -9,14 +9,14 @@
                 <div class="card mt-5">
                     <div class="row">
                         @include('layouts.side-menu')
-                        <div class="col-md-9 py-4 pl-lg-0">
+                        <div class="col-md-9 py-4 pl-lg-0" id="your-score">
                             <div class="mt-0">
                                 <div class="col-md-12">
 
                                     <div class="questtions-label page-heading">Your Results</div>
 
                                     <div class="text-right">
-                                        <button class="w-auto submit-btn btn btn-outline-theme btn-rounded waves-effect z-depth-0 m-0" onclick="printDiv()">
+                                        <button class="submit-btn btn btn-outline-theme btn-rounded waves-effect z-depth-0 m-0 btn-sm-block my-2" onclick="printDiv()">
                                             Print Report
                                         </button>
                                     </div>
@@ -122,24 +122,38 @@
                                                     flex-wrap: wrap;
                                                 }
 
-                                                .col-md-5 {
-                                                    -ms-flex: 0 0 41.666667%;
-                                                    flex: 0 0 41.666667%;
-                                                    max-width: 41.666667%;
+                                                .col-md-5,.progress-cat.col-md-4 {
+                                                    -ms-flex: 0 0 40%;
+                                                    flex: 0 0 40%;
+                                                    max-width: 40%;
                                                 }
 
-                                                .col-md-2 {
+                                                .cat_total.col-md-3 {
                                                     -ms-flex: 0 0 16.666667%;
                                                     flex: 0 0 16.666667%;
                                                     max-width: 16.666667%;
+                                                    padding-left: 15px;
                                                 }
-
+                                                .col-md-8 {
+                                                    -ms-flex: 0 0 75%;
+                                                    flex: 0 0 75%;
+                                                    max-width: 75%;
+                                                }
+                                                .col-md-4 {
+                                                    -ms-flex: 0 0 25%;
+                                                    flex: 0 0 25%;
+                                                    max-width: 25%;
+                                                }
                                                 .col-md-12 {
                                                     -ms-flex: 0 0 100%;
                                                     flex: 0 0 100%;
                                                     max-width: 100%;
                                                 }
-
+                                                .col-md-6 {
+                                                    -ms-flex: 0 0 50%;
+                                                    flex: 0 0 50%;
+                                                    max-width: 50%;
+                                                }
                                                 .alert-danger {
                                                     color: #721c24;
                                                     background-color: #f8d7da;
@@ -160,29 +174,40 @@
                                                 .see-where{
                                                     display: none;
                                                 }
+                                                .text-md-right{
+                                                    text-align: right;
+                                                }
                                             }
                                         </style>
-                                        @if($result == 'passed')
-                                            <div class="alert alert-success mt-3" role="alert">
-                                                YOU PASSED
-                                            </div>
-                                        @elseif($result == 'failed')
-                                            <div class="alert alert-danger mt-3" role="alert">
-                                                YOU FAILED
-                                            </div>
-                                        @elseif($result == 'quiz')
-                                            <div class="alert alert-success mt-3" role="alert">
-                                                Quiz Completed
-                                            </div>
-                                        @endif
 
-                                        <div class="score-card">
+
+                                        <div class="score-card row mt-3">
+                                            <div class="col-md-6">
+                                            @if($result == 'passed')
+                                                <div class="font-weight-500" role="alert">
+                                                    YOU PASSED !
+                                                </div>
+                                            @elseif($result == 'failed')
+                                                <div class="font-weight-500" role="alert">
+                                                    YOU FAILED !
+                                                </div>
+                                            @elseif($result == 'quiz')
+                                                <div class="font-weight-500" role="alert">
+                                                    Quiz Completed !
+                                                </div>
+                                            @endif
                                             <div class="score"><strong>SCORE : </strong> {{ $correct }}/{{ $total }}
-                                                ({{ ($correct/$total) * 100 }}%)
+                                                ({{ round(($correct/$total) * 100) }}%)
+                                            </div>
                                             </div>
                                             @if($average_duration)
+                                                <div class="col-md-6 text-md-right">
                                                 <div class="avg-time"><strong>Average Time Per
-                                                        Question: </strong> {{ $average_duration }} min
+                                                        Question </strong>
+                                                </div>
+                                                    <div class="">
+                                                        {{ $average_duration }} min
+                                                    </div>
                                                 </div>
                                             @endif
                                         </div>
@@ -190,7 +215,7 @@
                                         <div class="breakdown">
                                             <h5 class="mt-3 font-weight-500">Breakdown</h5>
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-8">
                                                     @if($categories->count())
                                                         @foreach($categories as $category)
                                                             @if($category->total > 0)
@@ -203,7 +228,7 @@
                                                                 @endphp
                                                                 <div class="cat_progress row my-2">
                                                                     <div class="cat_total col-md-5">{{ $category->name }}</div>
-                                                                    <div class="progress-cat col-md-5">
+                                                                    <div class="progress-cat col-md-4">
                                                                         <div class="progress">
                                                                             <div class="progress-bar progress-bar-striped"
                                                                                  role="progressbar"
@@ -213,21 +238,20 @@
                                                                                  aria-valuemax="100"></div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="cat_total col-md-2">{{ ($category->count ? $category->count : 0).'/'.$category->total.' correct' }}</div>
+                                                                    <div class="cat_total col-md-3">{{ ($category->count ? $category->count : 0).'/'.$category->total.' correct' }}</div>
                                                                 </div>
                                                             @endif
                                                         @endforeach
                                                     @endif
                                                 </div>
                                                 @if(isset($isScored))
-                                                    <div class="col-md-12 mt-3 text-center">
+                                                    <div class="col-md-4 text-center">
                                                         <canvas id="breakdownChart"></canvas>
                                                         <img class="hide" id="canvasImage" src="">
                                                     </div>
                                                 @endif
                                                 <div class="col-md-12 mt-3 text-center see-where">
-                                                    <a href="{{ route('report.card', $test_id) }}">See where you got
-                                                        wrong.</a>
+                                                    <a href="{{ route('report.card', $test_id) }}">See what you got wrong.</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -264,8 +288,12 @@
                 }]
             },
             options: {
-                responsive: true
-            }
+                responsive: true,
+                legend: {
+                    display: false,
+                }
+            },
+
         }
         @foreach($categories as $key_cat =>  $category)
         @if($category->total > 0)
@@ -300,5 +328,11 @@
 
 
         }
+
+        jQuery(document).ready(function () {
+            jQuery('html, body').animate({
+                scrollTop: jQuery('#your-score').offset().top
+            }, 'fast');
+        });
     </script>
 @endsection

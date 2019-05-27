@@ -103,7 +103,7 @@
 
                                     <div class="md-form">
                                         {{ Form::textarea('citation', isset($card) ? $card->citation : '',
-                                        ['class' => 'form-control md-textarea'.($errors->has('citation') ? ' is-invalid' : ''), 'rows'=>3, 'id' => 'citation', 'placeholder' => 'Citation Information']) }}
+                                        ['class' => 'form-control md-textarea'.($errors->has('citation') ? ' is-invalid' : ''), 'rows'=>3, 'id' => 'citation', 'placeholder' => 'Reference Information']) }}
                                         <i class="fa fa-pencil icon"></i>
                                         @if ($errors->has('citation'))
                                             <span class="invalid-feedback" role="alert">

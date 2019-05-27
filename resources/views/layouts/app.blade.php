@@ -22,7 +22,7 @@
     <header class="header">
         <div class="container">
             <div class="row site-header clearfix">
-                <div class="col-lg-4 col-md-4 col-sm-12 title-area">
+                <div class="col-lg-3 col-md-3 col-sm-12 title-area">
                     <div class="site-title" id="title">
                         <a href="{{ Auth::id() ? route('home') : route('index') }}" title="">
                             <img src="{{ asset('images/logo.png') }}">
@@ -73,7 +73,7 @@
     @yield('content')
     <footer>
         <div class="footer text-center">
-            copyright © 2019 CBETFlashcards.com
+            Copyright © 2019 CBETFlashcards.com
         </div>
     </footer>
 

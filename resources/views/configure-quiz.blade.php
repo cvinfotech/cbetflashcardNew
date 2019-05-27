@@ -72,6 +72,7 @@
                                                                        for="learn_mode_practice">Learn Mode</label>
                                                             </div>
                                                         </div>
+                                                        <small class="small-text">get instant feedback about your answer choice</small>
                                                         <div class="isTimed mt-4">
                                                             <div class="custom-control custom-switch">
                                                                 <input type="checkbox" class="custom-control-input"
@@ -113,6 +114,7 @@
                                                                        for="learn_mode_quiz">Learn Mode</label>
                                                             </div>
                                                         </div>
+                                                        <small class="small-text">get instant feedback about your answer choice</small>
                                                         <div class="quiz-num">
                                                             <div class="md-form">
                                                                 {{ Form::select('question_num', ['10' => '10', '25' => '25', '50' => '50', '100' => '100'], '',
@@ -129,7 +131,7 @@
                                                             <div class="custom-control custom-switch">
                                                                 <input type="checkbox" class="custom-control-input"
                                                                        name="timed"
-                                                                       id="is_timed_quiz" checked>
+                                                                       id="is_timed_quiz">
                                                                 <label class="custom-control-label"
                                                                        for="is_timed_quiz">Timed</label>
                                                             </div>
@@ -160,7 +162,7 @@
 
                                                         <tr>
                                                             <!--<td data-title="S.No">{{-- $test_key + 1 --}}</td>-->
-                                                            <td data-title="Test Type">{{ $test_history->test_type }}</td>
+                                                            <td data-title="Test Type">{{ ucfirst($test_history->test_type) }}</td>
                                                             <td data-title="Questions Answered">{{ $test_history->getTestResult->count().'/'.$test_history->question_num }}</td>
                                                             <td data-title="Date">{{ $test_history->created_at->format('d M, Y') }}</td>
                                                             <td data-title="Actions">
