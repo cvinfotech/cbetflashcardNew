@@ -69,8 +69,8 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ 'No Custom Cards.' }}
+                                            <div class="alert " role="alert">
+                                                You haven’t created any custom flashcards yet. <a href="{{ route('custom.card.add') }}">Click here</a> to add one.
                                             </div>
                                         @endif
                                     </div>

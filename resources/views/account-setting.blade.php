@@ -25,6 +25,10 @@
                                     <div class="alert alert-danger" role="alert">
                                         Your membership will expire on {{ \Carbon\Carbon::createFromTimestamp(strtotime(Auth::user()->next_payment_date))->format('d M, Y') }}
                                     </div>
+                                    @elseif($end_date)
+                                        <div class="alert alert-danger" role="alert">
+                                            Your membership will expire on {{ \Carbon\Carbon::createFromTimestamp(strtotime($end_date))->format('d M, Y') }}
+                                        </div>
                                     @endif
                                     <div class="questtions-label page-heading">Account Setting</div>
                                 {!! Form::open(['route' => 'account.update']) !!}

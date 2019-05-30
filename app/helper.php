@@ -58,3 +58,13 @@ if(!function_exists('randomPassword')) {
         return implode($pass); //turn the array into a string
     }
 }
+
+if(!function_exists('getCancelUrl')){
+    function getCancelUrl(){
+        if(Auth::user()->payment_method == 'stripe'){
+            return 'subscription.cancel';
+        }else{
+            return 'account.cancel';
+        }
+    }
+}

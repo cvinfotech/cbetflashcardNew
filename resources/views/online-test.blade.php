@@ -70,8 +70,9 @@
                                                                            class="custom-control-input option {{ $option_key }}"
                                                                            name="option_{{ $set->id }}"
                                                                            value="{{ $option_key }}">
-                                                                    <label class="custom-control-label">{!! $options[$option_key] !!}</label>
-                                                                    @if($learn_mode)
+                                                                    <label class="custom-control-label">{!! $options[$option_key] !!}
+                                                                        @if($learn_mode)
+                                                                        <i class="quick-answer fas {{ $set->answer == $option_key ? 'fa-check' : 'fa-times'}}"></i></label>
                                                                         <div class="alert alert-{{ $set->answer == $option_key ? 'success' : 'danger' }}"
                                                                              role="alert">
                                                                             {!! '<strong>'.($set->answer == $option_key ? 'Correct - ' : 'Wrong - ').'</strong> '.$hints[$option_key] !!}
@@ -231,8 +232,16 @@
 @endsection
 @section('scripts')
     <script>
+        var allowSaved = false;
+        window.onbeforeunload = function() {
+            if(!allowSaved) {
+                return "Test should be saved or discarded.?";
+            }
+        };
         jQuery(document).ready(function () {
+            jQuery('label.custom-control-label').on('click', function(){
 
+            });
             jQuery(document).on('click', '.question-answer label.custom-control-label', function () {
                 jQuery(this).toggleClass('strike');
                 if (jQuery(this).hasClass('strike')) {
@@ -349,6 +358,9 @@
             });
             var questions = [];
             jQuery(document).on('click', 'button.submit-btn.btn, button.exit-btn.btn', function () {
+
+                allowSaved = true;
+                if($(this).hasClass('submit-btn')){
                 questions = [];
                 var $currentItem = jQuery('.test-questions .question-answer.active');
 
@@ -370,8 +382,8 @@
                 console.log(questions);
                 questions = questions.reverse();
                 if(count >0) {
-                    var question = jQuery('#question-'+questions[0]+' .question').text();
-                    var options = jQuery('#question-'+questions[0]+' .options').html();
+                    var question = jQuery('#question-' + questions[0] + ' .question').text();
+                    var options = jQuery('#question-' + questions[0] + ' .options').html();
 
 
                     jQuery('.submit-modal-btn, .prev-modal-btn').addClass('hide');
@@ -381,12 +393,13 @@
 
                     jQuery('#unAnsQuesModal .question-answer .options').html(options);
                     jQuery('#unAnsQuesModal').modal('show');
-                    if(count > 1) {
+                    if (count > 1) {
                         jQuery('#unAnsQuesModal .submit-modal-btn').addClass('hide');
-                    }else{
+                    } else {
                         jQuery('#unAnsQuesModal .submit-modal-btn').removeClass('hide');
                     }
                     return false;
+                }
                 }else{
 
                 }
@@ -461,6 +474,7 @@
         });
 
         jQuery(document).on('click','#unAnsQuesModal .submit-modal-btn', function () {
+            allowSaved = true;
             jQuery('.submit-btn').click();
         });
                 @if(!empty($counter))

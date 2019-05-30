@@ -1,4 +1,8 @@
 <div class="col-md-3 pr-lg-0">
+    <button class="side-menu btn btn-dark w-100 m-0 p-1 collapsed" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fas fa-bars"></i>Menu
+    </button>
+    <div class="collapse" id="collapseExample">
     <ul class="side-nav list-group">
         @if(isset(Auth::user()->user_type) && Auth::user()->user_type == 'admin')
             <li class="list-group-item py-4">
@@ -36,7 +40,7 @@
             </li>
         @else
             <li class="list-group-item py-4">
-                <a href="{{ route('home') }}">Topic</a>
+                <a href="{{ route('home') }}">Flashcards</a>
                 <form method="get" action="{{ route('home') }}">
                 <select name="topic_cat" class="topic_cat" onchange="this.form.submit()">
                     <option value="">All</option>
@@ -56,6 +60,9 @@
             <li class="list-group-item py-4">
                 <a href="{{ route('configure.quiz') }}">Practice Test</a>
             </li>
+            <li class="list-group-item py-4">
+                <a href="{{ route('test.results') }}">Test Results</a>
+            </li>
 			@if(false)
             <li class="list-group-item py-4">
                 <a href="javascript:void(0)" id="spotted-on-test">Spotted on test</a>
@@ -63,13 +70,14 @@
 			@endif
         @endif
     </ul>
+    </div>
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="deleteProfileModal" tabindex="-1" role="dialog" aria-labelledby="deleteProfileModal"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
-        {!! Form::open(['route' => 'account.cancel', 'method' => 'GET']) !!}
+        {!! Form::open(['route' => getCancelUrl(), 'method' => 'GET']) !!}
         @csrf
         <div class="modal-content">
             <div class="modal-header">

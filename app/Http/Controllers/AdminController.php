@@ -360,9 +360,14 @@ class AdminController extends Controller
         return back()->with('success', 'Successfully deleted');
     }
 
-    public function onlineTest(){
-        $online_tests = OnlineTest::paginate(10);
-        return view('admin.online-test', compact('online_tests'));
+    public function onlineTest(Request $request){
+        $online_tests = OnlineTest::query();
+        $search_ques = $request->search_ques;
+        if(!empty($search_ques)){
+            $online_tests->where('question','like','%'.$search_ques.'%');
+        }
+        $online_tests = $online_tests->paginate(10);
+        return view('admin.online-test', compact('online_tests', 'search_ques'));
     }
 
     public function addTestQuestion(){

@@ -4,6 +4,13 @@ div#title img {
 body {
     background: #dfe3e4;
 }
+html,body {
+    height: 100%;
+}
+
+body>.container {
+    min-height: calc(100% - 108px);
+}
 header.header {
     background: #ffffff;
     display: block;
@@ -381,19 +388,21 @@ tr.danger {
 }
 
 .custom-switch .custom-control-label::before {
-    left: -2.25rem;
-    width: 2rem;
+    left: -3rem;
+    width: 2.5rem;
     pointer-events: all;
     border-radius: .75rem;
-    height: 1.15rem;
+    height: 1.44rem;
 }
 .custom-switch .custom-control-input:checked~.custom-control-label::after {
-    -webkit-transform: translateX(0.9rem);
-    transform: translateX(0.9rem);
+    -webkit-transform: translateX(1rem);
+    transform: translateX(1rem);
 }
 .custom-switch .custom-control-label::after{
-    width: calc(1.15rem - 4px);
-    height: calc(1.15rem - 4px);
+    left: calc(-3rem + 2px);
+    width: calc(1.44rem - 4px);
+    height: calc(1.44rem - 4px);
+    border-radius: .6rem;
 }
 .progress-bar{
     background-color: #4dccbd;
@@ -406,6 +415,61 @@ tr.danger {
 }
 .un-answered{
     display: none;
+}
+.question-answer .options input.option:not(:checked) + label .quick-answer {
+    display: none;
+}
+
+i.quick-answer.fas.fa-times {
+    color: red;
+}
+
+i.quick-answer.fas.fa-check {
+    color: #28a745;
+}
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    background: no-repeat;
+}
+
+.form-control.is-valid, .was-validated .form-control:valid {
+    background: no-repeat;
+}
+.breakdown .chart-column {
+    max-height: 250px;
+}
+.score-card .status {
+    font-size: 2rem;
+}
+.see-where a {
+    text-decoration: underline;
+}
+.custom-switch .custom-control-label {
+    line-height: 2rem;
+}
+
+.custom-switch {
+    padding-left: 3rem;
+}
+a.navbar-brand {
+    width: 50%;
+}
+
+a.navbar-brand img {
+    width: 100%;
+}
+.navbar{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+nav.navbar {
+    display: none;
+}
+button.side-menu {
+    display: none;
+}
+div#collapseExample {
+    display: block;
 }
 @media only screen and (min-width: 1025px) {
     table.test-questions  {
@@ -461,11 +525,44 @@ only screen and (max-width: 760px),
     td:before { content: attr(data-title); }
 }
 @media only screen and (max-width: 475px) {
+    .site-header .col-sm-6 {
+        width: 49.99%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    header.header .site-title a {
+        display: inline-block;
+        padding: 12px 0px;
+    }
     .top-card p.question {
         display: none;
     }
     .btn-sm-block {
         display: block;
         width: 100%;
+    }
+    .topnav {
+        display:none;
+    }
+    nav.navbar {
+        display:flex;
+    }
+    .title-area {
+        display: none;
+    }
+    i.fas.fa-bars {
+        font-size: 1.5rem;
+        margin-right: 5px;
+    }
+
+    button.side-menu {
+        font-size: 1.5rem;
+    }
+    button.side-menu {
+        display: block;
+    }
+    div#collapseExample.collapse:not(.show) {
+        display: none;
     }
 }

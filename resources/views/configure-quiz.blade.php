@@ -90,7 +90,7 @@
                                                 </div>
                                                 <div class="tab-pane fade" id="quiz" role="tabpanel"
                                                      aria-labelledby="quiz-tab">
-                                                    <form method="post" action="{{ route('start.test') }}">
+                                                    <form method="post" action="{{ route('start.test') }}" class="needs-validation" novalidate>
                                                         @csrf
                                                         <input type="hidden" name="test_type" value="quiz">
                                                         <div class="mt-4">
@@ -98,6 +98,9 @@
                                                                 {{ Form::select('category', getCategories(), '',
                                                                 ['required' => 'required', 'class' => 'form-control'.($errors->has('category') ? ' is-invalid' : ''), 'id' => 'category', 'placeholder' => 'Select Category']) }}
                                                                 <i class="fas fa-caret-down"></i>
+                                                                <div class="invalid-feedback">
+                                                                    Select an item from the list.
+                                                                </div>
                                                                 @if ($errors->has('category'))
                                                                     <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $errors->first('category') }}</strong>
@@ -120,6 +123,9 @@
                                                                 {{ Form::select('question_num', ['10' => '10', '25' => '25', '50' => '50', '100' => '100'], '',
                                                                 ['required' => 'required', 'class' => 'form-control'.($errors->has('question_num') ? ' is-invalid' : ''), 'id' => 'question_num', 'placeholder' => 'Select number of questions']) }}
                                                                 <i class="fas fa-caret-down"></i>
+                                                                <div class="invalid-feedback">
+                                                                    Select an item from the list.
+                                                                </div>
                                                                 @if ($errors->has('question_num'))
                                                                     <span class="invalid-feedback" role="alert">
                                                                         <strong>{{ $errors->first('question_num') }}</strong>
@@ -199,8 +205,22 @@
 @endsection
 @section('scripts')
     <script>
-        jQuery(document).ready(function () {
-
-        });
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+// Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
     </script>
 @endsection

@@ -22,7 +22,7 @@
     <header class="header">
         <div class="container">
             <div class="row site-header clearfix">
-                <div class="col-lg-3 col-md-3 col-sm-12 title-area">
+                <div class="col-lg-3 col-md-3 col-sm-6 title-area">
                     <div class="site-title" id="title">
                         <a href="{{ Auth::id() ? route('home') : route('index') }}" title="">
                             <img src="{{ asset('images/logo.png') }}">
@@ -31,6 +31,61 @@
                 </div>
 
                 <div class="col-lg-8 col-md-12 col-sm-12">
+
+                    <nav class="navbar navbar-expand-md navbar-light bg-white">
+                        <!-- Brand -->
+                        <a class="navbar-brand" href="{{ Auth::id() ? route('home') : route('index') }}" title="">
+                            <img src="{{ asset('images/logo.png') }}">
+                        </a>
+
+                        <!-- Toggler/collapsibe Button -->
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <!-- Navbar links -->
+                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                            <ul class="navbar-nav mr-auto">
+
+                                @guest
+                                    <li class="nav-item">
+                                        <a href="{{ route('login') }}">Log in</a>
+                                    </li>
+                                    @if (Route::has('register'))
+                                        <li class="nav-item">
+                                            <a href="{{ route('register') }}">Register</a>
+                                        </li>
+                                    @endif
+                                @else
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Hi, {{ Auth::user()->name }} <span class="caret"></span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                            @if(Auth::user()->user_type != 'admin')
+                                                <a class="dropdown-item" href="{{ route('home') }}">
+                                                    Flashcards
+                                                </a>
+                                                <a class="dropdown-item" href="{{ route('account.setting') }}">
+                                                    My Account
+                                                </a>
+                                            @endif
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </div>
+                                    </li>
+                                @endguest
+
+                            </ul>
+                        </div>
+                    </nav>
                     <div class="topnav">
                         <div class="topnav-right">
                             @guest

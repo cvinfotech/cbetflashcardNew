@@ -69,8 +69,8 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ 'You have not selected any favorites yet.' }}
+                                            <div class="alert " role="alert">
+                                                You haven’t favorited any cards yet. When you do, they will appear here.
                                             </div>
                                         @endif
                                     </div>

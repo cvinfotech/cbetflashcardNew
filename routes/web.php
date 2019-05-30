@@ -34,6 +34,7 @@ Route::get('/account-setting', 'DashboardController@accountSetting')->name('acco
 Route::post('/account-setting', 'DashboardController@accountUpdate')->name('account.update');
 Route::delete('/account-delete', 'DashboardController@deleteAccount')->name('account.delete');
 Route::get('/account-cancel', 'PaypalController@cancelAgreement')->name('account.cancel');
+Route::get('/subscription-cancel', 'StripeController@cancelSubscription')->name('subscription.cancel');
 Route::get('/payments', 'DashboardController@payments')->name('payments');
 Route::post('/change-plan', 'DashboardController@changePlan')->name('change.plan');
 Route::get('/configure-quiz', 'DashboardController@configureQuiz')->name('configure.quiz');
@@ -42,6 +43,7 @@ Route::get('/online-test/{test_id}', 'DashboardController@onlineTest')->name('on
 Route::post('/submit-test', 'DashboardController@submitTest')->name('submit.test');
 Route::get('/your-score/{test_id}', 'DashboardController@yourScore')->name('your.score');
 Route::get('/report-card/{test_id}', 'DashboardController@reportCard')->name('report.card');
+Route::get('/test-results/', 'DashboardController@testResults')->name('test.results');
 
 Route::get('/check-spotted', 'DashboardController@checkSpotted')->name('check.spotted');
 
@@ -59,6 +61,8 @@ Route::get('update-plan/{plan_id}', 'PaypalController@update_plan');
 //Admin
 Route::get('create_paypal_plan/{plan_id}', 'PaypalController@create_plan')->name('create.paypal.plan')->middleware('admin');
 Route::get('delete_paypal_plan/{plan_id}', 'PaypalController@delete_plan')->name('delete.paypal.plan')->middleware('admin');
+
+Route::get('create_stripe_plan/{plan_id}', 'StripeController@createPlan')->name('create.stripe.plan')->middleware('admin');
 
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/add-card', 'AdminController@addCard')->name('card.add');

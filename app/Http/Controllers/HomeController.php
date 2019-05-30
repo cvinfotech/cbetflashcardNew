@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\PaymentHistory;
+use App\Subscription;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -73,6 +75,21 @@ class HomeController extends Controller
                 }
                 $user->save();
             }
+        }elseif ($request->type == 'invoice.payment_succeeded'){
+            $amount = $request->data['object']['lines']['data'][0]['plan']['amount'];
+            $payment_history = new PaymentHistory;
+            $payment_history->payment_method = 'stripe';
+            $payment_history->transaction_id = $request->data['object']['id'];
+            $payment_history->amount = $amount/100;
+            $payment_history->status = 'done';
+            $customer_id = $request->data['object']['customer'];
+            $user = User::where('stripe_id', $customer_id)->first();
+            $payment_history->user_id = $user->id;
+            $payment_history->save();
+        }elseif ($request->type == 'customer.subscription.deleted'){
+            $customer_id = $request->data['object']['customer'];
+            $user = User::where('stripe_id', $customer_id)->first();
+            Subscription::where('user_id', $user->id)->delete();
         }
         Log::info($request->all());
     }

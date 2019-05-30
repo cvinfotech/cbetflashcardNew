@@ -70,6 +70,15 @@ class PaypalController extends Controller
             ->setDescription($site_plan->description)
             ->setType('INFINITE');
 
+        // Set billing plan definitions for trial
+        $trialPaymentDefinition = new PaymentDefinition();
+        $trialPaymentDefinition->setName(env('APP_NAME').' 7 Days Free')
+            ->setType('TRIAL')
+            ->setFrequency('Week')
+            ->setFrequencyInterval(1)
+            ->setCycles(1)
+            ->setAmount(new Currency(array('value' => 0, 'currency' => 'USD')));
+
         // Set billing plan definitions
         $paymentDefinition = new PaymentDefinition();
         $paymentDefinition->setName('Payment to '.env('APP_NAME'))
@@ -88,7 +97,7 @@ class PaypalController extends Controller
             ->setInitialFailAmountAction('CONTINUE')
             ->setMaxFailAttempts('0');
 
-        $plan->setPaymentDefinitions(array($paymentDefinition));
+        $plan->setPaymentDefinitions(array($trialPaymentDefinition, $paymentDefinition));
         $plan->setMerchantPreferences($merchantPreferences);
 
         //create the plan
@@ -109,6 +118,7 @@ class PaypalController extends Controller
                 //echo 'Plan ID:' . $plan->getId();
                 $site_plan->plan_id = $plan->getId();
                 $site_plan->save();
+                //return redirect()->route('create.stripe.plan', $plan_id);
                 return redirect()->route('plans.all')->with('success', 'Plan added successfully');
             } catch (PayPalConnectionException $ex) {
                 echo $ex->getCode();

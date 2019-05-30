@@ -21,7 +21,26 @@
                                         </div>
                                     @endif
                                     <div class="questtions-label">Test Questions</div>
-                                        <a href="{{ route('add.test-question') }}" class="text-underline">Add Question</a>
+                                        {!! Form::open(['method' => 'get']) !!}
+                                        <div class="row top-filters">
+                                            <div class="col-md-2">
+                                                <a href="{{ route('add.test-question') }}" class="text-underline">Add Question</a>
+                                            </div>
+                                            <div class="offset-3"></div>
+                                            <div class="col-md-4">
+                                                <div class="md-form m-0">
+                                                    {!! Form::text('search_ques', $search_ques, ['class' => 'form-control', 'id' => 'search_ques', 'placeholder' => 'Search Question']) !!}
+                                                    <i class="fas fa-search"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <button class="btn  m-0 btn-outline-theme btn-rounded btn-block waves-effect z-depth-0"
+                                                        type="submit">Search
+                                                </button>
+                                            </div>
+                                        </div>
+                                        {!! Form::close() !!}
+
                                     <table class="table test-questions mt-3">
                                         <thead class="thead-theme">
                                         <tr>

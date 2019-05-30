@@ -20,7 +20,7 @@
                                             {{ __(session('error')) }}
                                         </div>
                                     @endif
-                                    <div class="questtions-label">Report Card</div>
+                                    <div class="questtions-label">Answer Breakdown</div>
 
                                     <table class="table mt-3">
                                         <thead class="thead-theme">

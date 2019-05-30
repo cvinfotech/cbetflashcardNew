@@ -184,15 +184,15 @@
                                         <div class="score-card row mt-3">
                                             <div class="col-md-6">
                                             @if($result == 'passed')
-                                                <div class="font-weight-500" role="alert">
+                                                <div class="font-weight-500 text-success status" role="alert">
                                                     YOU PASSED !
                                                 </div>
                                             @elseif($result == 'failed')
-                                                <div class="font-weight-500" role="alert">
-                                                    YOU FAILED !
+                                                <div class="font-weight-500 text-danger status" role="alert">
+                                                    Sorry. You Failed.
                                                 </div>
                                             @elseif($result == 'quiz')
-                                                <div class="font-weight-500" role="alert">
+                                                <div class="font-weight-500 text-success status" role="alert">
                                                     Quiz Completed !
                                                 </div>
                                             @endif
@@ -245,13 +245,14 @@
                                                     @endif
                                                 </div>
                                                 @if(isset($isScored))
-                                                    <div class="col-md-4 text-center">
+                                                    <div class="col-md-4 text-center chart-column">
                                                         <canvas id="breakdownChart"></canvas>
                                                         <img class="hide" id="canvasImage" src="">
+                                                        <h6 class="mt-2">Questions you got right by section</h6>
                                                     </div>
                                                 @endif
                                                 <div class="col-md-12 mt-3 text-center see-where">
-                                                    <a href="{{ route('report.card', $test_id) }}">See what you got wrong.</a>
+                                                    <a href="{{ route('report.card', $test_id) }}">See what you got wrong</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -289,8 +290,10 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 legend: {
-                    display: false,
+                    display: true,
+                    position: 'bottom'
                 }
             },
 
