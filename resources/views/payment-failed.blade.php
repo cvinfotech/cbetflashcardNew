@@ -120,7 +120,7 @@
 
 
         // Create a Stripe client.
-        var stripe = Stripe('pk_test_uFSAJPThEm2F5tJZlRbhfOeL');
+        var stripe = Stripe('{{ env('STRIPE_KEY') }}');
 
         // Create an instance of Elements.
         var elements = stripe.elements();

@@ -20,8 +20,8 @@
                                             {{ __(session('error')) }}
                                         </div>
                                     @endif
-                                    <div class="questtions-label">Past Test Results ({{ $test_results->total() }})</div>
-
+                                    <div class="questtions-label">Practice exam score history ({{ $test_results->total() }})</div>
+                                    <div class="sub-title">Only your completed practice exam results will be displayed here.</div>
                                         <div class="line-graph">
                                             <canvas id="pastResults" style="max-width: 100%;"></canvas>
                                         </div>

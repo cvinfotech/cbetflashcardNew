@@ -17,15 +17,8 @@ class StripeController extends Controller
 
     public function cancelSubscription(){
         $user = Auth::user();
-        if($user->plan) {
-            $plan = Plan::find($user->plan);
-            if($plan) {
-                $stripe_plan = $plan->stripe_plan;
-                if($stripe_plan) {
-                    $user->subscription($stripe_plan)->cancel();
-                    return back();
-                }
-            }
-        }
+
+        $user->subscription('main')->cancelNow();
+        return back();
     }
 }

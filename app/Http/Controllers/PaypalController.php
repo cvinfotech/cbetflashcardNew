@@ -210,6 +210,7 @@ class PaypalController extends Controller
                 $user->status = 'active';
                 $user->agreement = '';
                 $agreement_id = $result->id;
+                $user->payment_method = 'paypal';
             }
             $user->save();
             $status = 'Done';

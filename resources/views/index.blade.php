@@ -102,6 +102,7 @@
 </header>
 <section id="intro">
     <div class="container">
+        <a class="startyour d-block w-auto p-5" href="/register">Start your 7 day free trial Today!</a>
         <div class="ror">
             <div class="col-md-8 col-md-offset-2">
                 @if (session('success'))
@@ -193,11 +194,13 @@
                        <hr>
                      </div>-->
                     <div class="icn-main-container">
-                        <span class="icn-container">$20</span>
-                        <span class="icn-container sub">/ 3 Months Access</span>
+                        <span class="icn-container">$5</span>
+                        <span class="icn-container sub">/ Month Access</span>
 
                     </div>
                     <ul class="pricing">
+                        <li>7 days free trial</li>
+                        <li>Unlimited practice exams and quizzes</li>
                         <li>Best value for study material in the market</li>
                         <li>Access to all question banks</li>
                         <li>Create unlimited custom cards</li>
@@ -214,11 +217,15 @@
                     <div class="servicetitle">
                     </div>
                     <div class="icn-main-container">
-                        <span class="icn-container">$35</span>
+                        <div class="banner-container">
+                            <div class="banner">Best Seller</div>
+                        </div>
+                        <span class="icn-container">$30</span>
                         <span class="icn-container sub">/ 6 Months Access</span>
                     </div>
                     <ul class="pricing">
-                        <li>Save 6.25% by purchasing 6 months access</li>
+                        <li>7 days free trial</li>
+                        <li>Unlimited practice exams and quizzes</li>
                         <li>Access to all question banks</li>
                         <li>Create unlimited custom cards</li>
                         <li>See questions spotted on the test</li>
@@ -235,14 +242,13 @@
 
                     </div>
                     <div class="icn-main-container">
-                        <div class="banner-container">
-                            <div class="banner">Best Seller</div>
-                        </div>
-                        <span class="icn-container">$60</span>
+
+                        <span class="icn-container">$50</span>
                         <span class="icn-container sub">/ Yearly</span>
                     </div>
                     <ul class="pricing">
-                        <li>Save 14.29% by purchasing the yearly access</li>
+                        <li>7 days free trial</li>
+                        <li>Unlimited practice exams and quizzes</li>
                         <li>Access to all question banks</li>
                         <li>Create unlimited questions cards</li>
                         <li>See questions spotted on the test</li>

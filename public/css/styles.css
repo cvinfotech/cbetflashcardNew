@@ -277,7 +277,7 @@ a.dropdown-item {
     margin-bottom: 2rem!important;
 }
 img.payment-method-img {
-    width: 200px;
+    height: 72px;
 }
 .top-card p.question {
     text-align: left;
@@ -436,6 +436,7 @@ i.quick-answer.fas.fa-check {
 }
 .breakdown .chart-column {
     max-height: 250px;
+    margin-bottom: 70px;
 }
 .score-card .status {
     font-size: 2rem;
@@ -470,7 +471,13 @@ button.side-menu {
 }
 div#collapseExample {
     display: block;
+    height: 100%;
 }
+img.payment-method-img.paypal {
+    height: 45px;
+    margin-left: 10px!important;
+}
+
 @media only screen and (min-width: 1025px) {
     table.test-questions  {
         word-break: break-word;
@@ -564,5 +571,8 @@ only screen and (max-width: 760px),
     }
     div#collapseExample.collapse:not(.show) {
         display: none;
+    }
+    .middle-card {
+        font-size: 1rem;
     }
 }

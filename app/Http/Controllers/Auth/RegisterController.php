@@ -92,7 +92,7 @@ class RegisterController extends Controller
             $plan = Plan::find($request->plan);
             $stripe_plan = $plan->stripe_plan;
             $plan_name = $stripe_plan;
-            $user->newSubscription($plan_name, $stripe_plan)
+            $user->newSubscription('main', $stripe_plan)
                 ->trialDays(7)
                 ->create($request->stripeToken);
             $this->redirectTo = '/home';

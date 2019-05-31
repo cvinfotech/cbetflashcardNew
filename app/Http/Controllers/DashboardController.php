@@ -311,21 +311,21 @@ class DashboardController extends Controller
 
 
         if($request->stripeToken){
-            $oldplan = Plan::find($old_plan);
-            if($oldplan) {
-                $stripe_plan = $oldplan->stripe_plan;
-                if($stripe_plan) {
-                    $user->subscription($stripe_plan)->cancelNow();
-                }
-            }
             $plan = Plan::find($request->plan);
             $stripe_plan = $plan->stripe_plan;
             $plan_name = $stripe_plan;
-            $subscription = $user->newSubscription($plan_name, $stripe_plan);
-            if(!$request->first_payment){
-                $subscription->trialDays(7);
-            }
+            if(isset($request->first_payment) && $request->first_payment == 'done' && $user->subscription('main')) {
+
+                $user->subscription('main')->swap($plan_name);
+                $user->updateCard($request->stripeToken);
+            }else{
+                $subscription = $user->newSubscription('main', $stripe_plan);
+                if(!isset($request->first_payment)) {
+                    $subscription->trialDays(7);
+                }
                 $subscription->create($request->stripeToken);
+            }
+
             $user->payment_method = 'stripe';
             $user->save();
             return redirect()->route('home');
@@ -521,10 +521,12 @@ class DashboardController extends Controller
             }
 
             $correct = TestReport::join('online_tests', 'test_reports.question_id', '=', 'online_tests.id')->whereRaw('chosen = answer')->where('test_id', $test_id)->count();
+            $total = $test_info->question_num;
+            $percentage = round(($correct / $total) * 100, 2);
             $test_info->score = $correct;
             if ($test_info->cat_id == null) {
-                $passing_marks = 116;
-                if ($correct >= $passing_marks) {
+                $passing_marks = 70;
+                if ($percentage >= $passing_marks) {
                     $test_info->result = 'passed';
                 } else {
                     $test_info->result = 'failed';
@@ -558,7 +560,7 @@ class DashboardController extends Controller
             $categories = Category::selectRaw('categories.*, (SELECT count(cat_id) as count FROM test_reports WHERE cat_id = categories.id AND test_id = ' . $test_id . ' AND chosen = correct GROUP BY cat_id) as count, (SELECT count(cat_id) as count FROM test_reports WHERE cat_id = categories.id AND test_id = ' . $test_id . ' GROUP BY cat_id) as total')->where('id', $test_history->cat_id)->get();
         }
 
-        return view('your-score', compact('correct', 'total', 'average_duration', 'result', 'categories', 'test_id'));
+        return view('your-score', compact('correct', 'total', 'average_duration', 'average_time', 'result', 'categories', 'test_id'));
     }
 
     public function reportCard($test_id)

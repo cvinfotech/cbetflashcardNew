@@ -206,7 +206,7 @@
                                                         Question </strong>
                                                 </div>
                                                     <div class="">
-                                                        {{ $average_duration }} min
+                                                        {{ $average_duration }} {{ $average_time >= 60 ? 'minutes' : 'seconds' }}
                                                     </div>
                                                 </div>
                                             @endif
@@ -243,17 +243,19 @@
                                                             @endif
                                                         @endforeach
                                                     @endif
+                                                        <div class=" mt-4 text-center see-where">
+                                                            <a href="{{ route('report.card', $test_id) }}">See what you got wrong</a>
+                                                        </div>
                                                 </div>
                                                 @if(isset($isScored))
                                                     <div class="col-md-4 text-center chart-column">
+                                                        <h6 class="font-weight-500 mt-2">Number of questions answered correctly</h6>
                                                         <canvas id="breakdownChart"></canvas>
                                                         <img class="hide" id="canvasImage" src="">
                                                         <h6 class="mt-2">Questions you got right by section</h6>
                                                     </div>
                                                 @endif
-                                                <div class="col-md-12 mt-3 text-center see-where">
-                                                    <a href="{{ route('report.card', $test_id) }}">See what you got wrong</a>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

@@ -21,7 +21,7 @@
                                             {{ __(session('error')) }}
                                         </div>
                                     @endif
-                                    @if(Auth::user()->agreement == 'cancelled')
+                                    @if(Auth::user()->agreement == 'cancelled' && $user->payment_method != 'stripe')
                                     <div class="alert alert-danger" role="alert">
                                         Your membership will expire on {{ \Carbon\Carbon::createFromTimestamp(strtotime(Auth::user()->next_payment_date))->format('d M, Y') }}
                                     </div>

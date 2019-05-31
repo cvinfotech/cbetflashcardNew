@@ -21,8 +21,8 @@
                                         </div>
                                     @endif
                                     <div class="questtions-label">Payment</div>
-                                    <div class="second-label mt-4">Paypal Method</div>
-                                    <div>{{ $payment_method == 'stripe' ? 'Stripe' : 'PayPal' }}
+                                    <div class="second-label mt-4">Payment Method</div>
+                                    <div>{{ $payment_method == 'stripe' ? 'Stripe #'.Auth::user()->card_last_four : 'PayPal' }}
                                         <a href="javascript:void(0)"  data-toggle="modal" data-target="#changePlanModal">Change</a>
                                     </div>
                                         @if($payment_method == 'stripe')
@@ -33,7 +33,7 @@
                                                 <tr>
                                                     <th>S.No</th>
                                                     <th>Date</th>
-                                                    <th>Invoice ID</th>
+                                                    <th>Transaction ID</th>
                                                     <th>Amount</th>
                                                     <th>Status</th>
                                                 </tr>
@@ -44,7 +44,7 @@
                                                         <tr>
                                                             <td data-title="S.No">{{ $keyP+1 }}</td>
                                                             <td data-title="Date">{{ $payment->created_at->format('d F, Y') }}</td>
-                                                            <td data-title="Agreement ID">{{ $payment->transaction_id }}</td>
+                                                            <td data-title="Transaction ID">{{ $payment->transaction_id }}</td>
                                                             <td data-title="Amount">${{ $payment->amount }}</td>
                                                             <td data-title="Status">{{ $payment->status }}</td>
                                                         </tr>
@@ -70,7 +70,7 @@
                                         <tr>
                                             <th>S.No</th>
                                             <th>Date</th>
-                                            <th>Agreement ID</th>
+                                            <th>Transaction ID</th>
                                             <th>Amount</th>
                                             <th>Status</th>
                                         </tr>
@@ -81,7 +81,7 @@
                                         <tr>
                                             <td data-title="S.No">{{ $keyP+1 }}</td>
                                             <td data-title="Date">{{ $payment->created_at->format('d F, Y') }}</td>
-                                            <td data-title="Agreement ID">{{ $payment->agreement_id }}</td>
+                                            <td data-title="Transaction ID">{{ $payment->transaction_id }}</td>
                                             <td data-title="Amount">${{ $payment->amount }}</td>
                                             <td data-title="Status">{{ $payment->status }}</td>
                                         </tr>
@@ -181,7 +181,91 @@
 @endsection
 
 @section('scripts')
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
+        $(document).on('change', 'select#payment_method', function () {
+            if($(this).val() == 'stripe'){
+                $('.md-form.stripe').show();
+            }else{
+                $('.md-form.stripe').hide();
+            }
+        })
+
+
+        // Create a Stripe client.
+        var stripe = Stripe('{{ env('STRIPE_KEY') }}');
+
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+
+        // Custom styling can be passed to options when creating an Element.
+        // (Note that this demo uses a wider set of styles than the guide below.)
+        var style = {
+            base: {
+                color: '#32325d',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+
+        // Create an instance of the card Element.
+        var card = elements.create('card', {style: style});
+
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            if($('#card-element:visible').length) {
+                event.preventDefault();
+
+                stripe.createToken(card).then(function (result) {
+                    if (result.error) {
+                        // Inform the user if there was an error.
+                        var errorElement = document.getElementById('card-errors');
+                        errorElement.textContent = result.error.message;
+                    } else {
+                        // Send the token to your server.
+                        stripeTokenHandler(result.token);
+                    }
+                });
+            }
+        });
+
+        // Submit the form with the token ID.
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            // Submit the form
+            form.submit();
+        }
+
+
         $("#deleteUserModal").on('show.bs.modal', function(e){
             var user_id = $(e.relatedTarget).data('user_id');
             $('#deleteUserModal input#delete_id').val(user_id);

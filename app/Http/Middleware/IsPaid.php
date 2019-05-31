@@ -18,11 +18,13 @@ class IsPaid
     public function handle($request, Closure $next)
     {
         $user = Auth::user();
+
         if($user->payment_method == 'stripe') {
             if(!empty($user->stripe_id)){
                 $site_plan = Plan::find($user->plan);
                 if($site_plan && $site_plan->stripe_plan) {
-                    if ($user->subscribed($site_plan->stripe_plan)) {
+                    //if ($user->subscribed($site_plan->stripe_plan)) {
+                    if ($user->subscription('main') && !$user->subscription('main')->cancelled()) {
                         return $next($request);
                     }
                 }

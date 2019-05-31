@@ -159,7 +159,8 @@
                                     type="submit">Register
                             </button>
 
-                            <img src="{{ asset('img/Paypal-Logo-2015.png') }}" class="payment-method-img mx-auto mt-2">
+                            <img src="{{ asset('img/credit_card.png') }}" class="payment-method-img stripe mx-auto mt-2">
+                            <img src="{{ asset('img/Paypal-Logo-2015.png') }}" class="payment-method-img paypal mx-auto mt-2">
 
                         </form>
                         <!-- Form -->
@@ -374,7 +375,7 @@
         });
 
         // Create a Stripe client.
-        var stripe = Stripe('pk_test_uFSAJPThEm2F5tJZlRbhfOeL');
+        var stripe = Stripe('{{ env('STRIPE_KEY') }}');
 
         // Create an instance of Elements.
         var elements = stripe.elements();
