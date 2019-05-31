@@ -1,29 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ff6d10aa-70ca-435b-ba1e-709d582f7059" name="Default Changelist" comment="latest cbet to new repository">
-      <change afterPath="$PROJECT_DIR$/public/img/credit_card.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/cbet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cbet.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="ff6d10aa-70ca-435b-ba1e-709d582f7059" name="Default Changelist" comment="all feedback done except navigating away point">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PaypalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PaypalController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StripeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StripeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/IsPaid.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/IsPaid.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cbet.zip" beforeDir="false" afterPath="$PROJECT_DIR$/cbet.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cbet1.zip" beforeDir="false" afterPath="$PROJECT_DIR$/cbet1.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/public.zip" beforeDir="false" afterPath="$PROJECT_DIR$/public/public.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/public1.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/account-setting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/account-setting.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/all-payments.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/all-payments.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/payment-failed.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/payment-failed.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/test-results.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/test-results.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/your-score.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/your-score.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,8 +84,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
-              <caret line="71" column="47" lean-forward="true" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
+            <state relative-caret-position="295">
+              <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -379,7 +358,7 @@
       <workItem from="1559112097774" duration="4763000" />
       <workItem from="1559190735910" duration="797000" />
       <workItem from="1559207677183" duration="11036000" />
-      <workItem from="1559274093065" duration="848000" />
+      <workItem from="1559274093065" duration="1552000" />
     </task>
     <task id="LOCAL-00001" summary="latest cbet">
       <created>1558502435683</created>
@@ -402,11 +381,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559190896300</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="all feedback done except navigating away point">
+      <created>1559275088214</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1559275088214</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81154000" />
+    <option name="totallyTimeSpent" value="81858000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -485,7 +471,8 @@
     <MESSAGE value="latest cbet" />
     <MESSAGE value="latest cbet to new repository" />
     <MESSAGE value="uploading for sachin" />
-    <option name="LAST_COMMIT_MESSAGE" value="uploading for sachin" />
+    <MESSAGE value="all feedback done except navigating away point" />
+    <option name="LAST_COMMIT_MESSAGE" value="all feedback done except navigating away point" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php">
@@ -858,8 +845,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="71" column="47" lean-forward="true" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
+        <state relative-caret-position="295">
+          <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
         </state>
       </provider>
     </entry>
