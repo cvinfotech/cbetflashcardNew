@@ -1,5 +1,10 @@
 <?php
 
+use Carbon\Carbon;
+use PayPal\Api\Agreement;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
+
 if(!function_exists('getCategory')){
     function getCategory($cat_id){
         $categories = \App\Category::pluck('name', 'id')->toArray();
@@ -66,5 +71,43 @@ if(!function_exists('getCancelUrl')){
         }else{
             return 'account.cancel';
         }
+    }
+}
+
+if(!function_exists('getEndDate')){
+    function getEndDate(){
+        $user = Auth::user();
+        if($user->payment_method == 'stripe') {
+            if(strtotime($user->current_period_end) > time()) {
+                $ends_at = Carbon::createFromTimeStamp(strtotime($user->current_period_end))->format('d M, Y');
+            }else{
+                $subscription = $user->subscription('main')->asStripeSubscription();
+                if ($subscription) {
+                    $ends_at = Carbon::createFromTimeStamp($subscription->current_period_end)->format('d M, Y');
+                }
+            }
+        }else{
+            if(strtotime($user->next_payment_date) > time()) {
+                $ends_at = Carbon::createFromTimeStamp(strtotime($user->next_payment_date))->format('d M, Y');
+            }else{
+                if(config('paypal.settings.mode') == 'live'){
+                    $client_id = config('paypal.live_client_id');
+                    $secret = config('paypal.live_secret');
+                } else {
+                    $client_id = config('paypal.sandbox_client_id');
+                    $secret = config('paypal.sandbox_secret');
+                }
+
+                // Set the Paypal API Context/Credentials
+                $apiContext = new ApiContext(new OAuthTokenCredential($client_id, $secret));
+                $apiContext->setConfig(config('paypal.settings'));
+                $cancelAgreementDetails = Agreement::get($user->agreement_id, $apiContext);
+                $user->next_payment_date = Carbon::parse($cancelAgreementDetails->getAgreementDetails()->next_billing_date)->format('Y-m-d H:i:s');
+                $user->save();
+                $ends_at = $user->next_payment_date;
+            }
+        }
+
+        return $ends_at;
     }
 }

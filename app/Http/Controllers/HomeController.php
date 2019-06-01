@@ -86,6 +86,9 @@ class HomeController extends Controller
             $user = User::where('stripe_id', $customer_id)->first();
             $payment_history->user_id = $user->id;
             $payment_history->save();
+            $subscription = $user->subscription('main')->asStripeSubscription();
+            $user->current_period_end = date('Y-m-d H:i:s', $subscription->current_period_end);
+            $user->save();
         }elseif ($request->type == 'customer.subscription.deleted'){
             $customer_id = $request->data['object']['customer'];
             $user = User::where('stripe_id', $customer_id)->first();

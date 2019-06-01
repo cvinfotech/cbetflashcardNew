@@ -22,7 +22,7 @@
                                     @endif
                                     <div class="questtions-label">Payment</div>
                                     <div class="second-label mt-4">Payment Method</div>
-                                    <div>{{ $payment_method == 'stripe' ? 'Stripe #'.Auth::user()->card_last_four : 'PayPal' }}
+                                    <div>Paypal and Credit Card {{ $payment_method == 'stripe' ? ' ending in '.Auth::user()->card_last_four : '' }}
                                         <a href="javascript:void(0)"  data-toggle="modal" data-target="#changePlanModal">Change</a>
                                     </div>
                                         @if($payment_method == 'stripe')

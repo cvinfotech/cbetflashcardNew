@@ -211,6 +211,8 @@ class PaypalController extends Controller
                 $user->agreement = '';
                 $agreement_id = $result->id;
                 $user->payment_method = 'paypal';
+                $cancelAgreementDetails = Agreement::get($agreement_id, $this->apiContext);
+                $user->next_payment_date = Carbon::parse($cancelAgreementDetails->getAgreementDetails()->next_billing_date)->format('Y-m-d H:i:s');
             }
             $user->save();
             $status = 'Done';

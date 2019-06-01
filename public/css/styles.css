@@ -474,10 +474,14 @@ div#collapseExample {
     height: 100%;
 }
 img.payment-method-img.paypal {
-    height: 45px;
+    height: 30px;
     margin-left: 10px!important;
+    display: block;
+    margin: 0 auto!important;
 }
-
+img.credit-card {
+    margin: 1rem;
+}
 @media only screen and (min-width: 1025px) {
     table.test-questions  {
         word-break: break-word;

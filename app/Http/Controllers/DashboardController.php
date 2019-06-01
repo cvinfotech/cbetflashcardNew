@@ -13,6 +13,7 @@ use App\Subscription;
 use App\TestHistory;
 use App\TestReport;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -325,7 +326,8 @@ class DashboardController extends Controller
                 }
                 $subscription->create($request->stripeToken);
             }
-
+            $subscription = $user->subscription('main')->asStripeSubscription();
+            $user->current_period_end = date('Y-m-d H:i:s', $subscription->current_period_end);
             $user->payment_method = 'stripe';
             $user->save();
             return redirect()->route('home');

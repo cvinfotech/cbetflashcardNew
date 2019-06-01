@@ -87,7 +87,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to cancel your account?
+                Are you sure you want to cancel your account? Your account will remain active until {{ getEndDate() }}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>

@@ -194,8 +194,11 @@
                        <hr>
                      </div>-->
                     <div class="icn-main-container">
+                        <div class="banner-container">
+                            <div class="banner">Best Seller</div>
+                        </div>
                         <span class="icn-container">$5</span>
-                        <span class="icn-container sub">/ Month Access</span>
+                        <span class="icn-container sub">/ Monthly Access</span>
 
                     </div>
                     <ul class="pricing">
@@ -217,15 +220,14 @@
                     <div class="servicetitle">
                     </div>
                     <div class="icn-main-container">
-                        <div class="banner-container">
-                            <div class="banner">Best Seller</div>
-                        </div>
+
                         <span class="icn-container">$30</span>
                         <span class="icn-container sub">/ 6 Months Access</span>
                     </div>
                     <ul class="pricing">
                         <li>7 days free trial</li>
                         <li>Unlimited practice exams and quizzes</li>
+                        <li>Best value for study material in the market</li>
                         <li>Access to all question banks</li>
                         <li>Create unlimited custom cards</li>
                         <li>See questions spotted on the test</li>
@@ -249,6 +251,7 @@
                     <ul class="pricing">
                         <li>7 days free trial</li>
                         <li>Unlimited practice exams and quizzes</li>
+                        <li>Best value for study material in the market</li>
                         <li>Access to all question banks</li>
                         <li>Create unlimited questions cards</li>
                         <li>See questions spotted on the test</li>

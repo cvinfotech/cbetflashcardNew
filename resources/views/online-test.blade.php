@@ -91,7 +91,7 @@
                                                                 type="button">Next Question
                                                         </button>
                                                         <button class="w-auto submit-btn btn btn-outline-theme btn-rounded my-4 waves-effect z-depth-0 hide"
-                                                                type="submit" name="submit" value="submit">Submit Test
+                                                                type="submit" name="submit" value="submit">Submit Quiz
                                                         </button>
 
                                                         <button class="w-auto prev-btn btn btn-outline-theme btn-rounded my-4 waves-effect z-depth-0 hide"
@@ -218,7 +218,7 @@
                             type="button">Next Question
                     </button>
                     <button class="w-auto submit-modal-btn btn btn-outline-theme btn-rounded my-4 waves-effect z-depth-0 hide"
-                            type="button" name="submit" value="submit">Submit Test
+                            type="button" name="submit" value="submit">Submit Quiz
                     </button>
 
                     <button class="w-auto prev-modal-btn btn btn-outline-theme btn-rounded my-4 waves-effect z-depth-0 hide"

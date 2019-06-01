@@ -96,6 +96,9 @@ class RegisterController extends Controller
                 ->trialDays(7)
                 ->create($request->stripeToken);
             $this->redirectTo = '/home';
+            $subscription = $user->subscription('main')->asStripeSubscription();
+            $user->current_period_end = date('Y-m-d H:i:s', $subscription->current_period_end);
+            $user->save();
         }
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());

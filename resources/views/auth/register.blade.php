@@ -159,7 +159,8 @@
                                     type="submit">Register
                             </button>
 
-                            <img src="{{ asset('img/credit_card.png') }}" class="payment-method-img stripe mx-auto mt-2">
+                            <img alt="Credit Card Logos" title="Credit Card Logos" src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_mastercard_logo_6.gif" width="102" height="32" border="0" class="credit-card mt-3 mb-2">
+
                             <img src="{{ asset('img/Paypal-Logo-2015.png') }}" class="payment-method-img paypal mx-auto mt-2">
 
                         </form>

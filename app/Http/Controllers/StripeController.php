@@ -18,7 +18,7 @@ class StripeController extends Controller
     public function cancelSubscription(){
         $user = Auth::user();
 
-        $user->subscription('main')->cancelNow();
+        $user->subscription('main')->cancel();
         return back();
     }
 }
