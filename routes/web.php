@@ -14,6 +14,7 @@
 Route::get('/', array('as' => 'index', 'uses' => 'HomeController@index'));
 Route::post('contact', array('as' => 'contact', 'uses' => 'HomeController@contact'));
 Route::get('/clear-cache', function() {
+    Artisan::call('config:clear');
     Artisan::call('cache:clear');
     return "Cache is cleared";
 });
@@ -44,6 +45,7 @@ Route::post('/submit-test', 'DashboardController@submitTest')->name('submit.test
 Route::get('/your-score/{test_id}', 'DashboardController@yourScore')->name('your.score');
 Route::get('/report-card/{test_id}', 'DashboardController@reportCard')->name('report.card');
 Route::get('/test-results/', 'DashboardController@testResults')->name('test.results');
+Route::get('/delete-test/{test_id}', 'DashboardController@deleteTest')->name('delete.test');
 
 Route::get('/check-spotted', 'DashboardController@checkSpotted')->name('check.spotted');
 

@@ -255,7 +255,7 @@
                                                         <h6 class="mt-2">Questions you got right by section</h6>
                                                     </div>
                                                 @endif
-
+                                               &nbsp;&nbsp; <u><a class="small" href="{{URL('/configure-quiz')}}">Start a new test or quiz</a><u>
                                             </div>
                                         </div>
                                     </div>
@@ -300,14 +300,22 @@
             },
 
         }
+        @if($test_type == 'practice')
         @foreach($categories as $key_cat =>  $category)
         @if($category->total > 0)
         args.data.labels.push('{!! $category->name !!}');
         args.data.datasets[0].data.push('{{$category->count}}');
         args.data.datasets[0].backgroundColor.push(backgroundColors['{{$key_cat}}']);
         args.data.datasets[0].hoverBackgroundColor.push(hoverBackgroundColors['{{$key_cat}}']);
-                @endif
-                @endforeach
+        @endif
+        @endforeach
+        @else
+        args.data.labels = ['Correct', 'wrong'];
+        args.data.datasets[0].data = [{{ $correct }}, {{ $total - $correct }}];
+
+        args.data.datasets[0].backgroundColor = ['#28a745', '#dc3545'];
+        args.data.datasets[0].hoverBackgroundColor = ['#00c851', '#ff3547'];
+        @endif
                 @if(isset($isScored))
         var ctxP = document.getElementById("breakdownChart").getContext('2d');
         var myPieChart = new Chart(ctxP, args);

@@ -508,6 +508,7 @@ body.nobg .section1 {
   margin-top: 10px;
   width: auto;
   display: inline-block;
+  display: none;
   float: right;
   color: #fff;
   background: #ffc107;

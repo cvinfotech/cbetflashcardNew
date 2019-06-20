@@ -20,8 +20,6 @@
 
                             <div class="mt-0">
                                 <div class="col-md-12">
-                                    <div class="questtions-label page-heading">Online Test</div>
-                                    <div class="un-answered">you have <span>x</span> unanswered questions</div>
 
                                     @if(!empty($counter))
                                         <div class="text-right">
@@ -44,16 +42,23 @@
                                                        value="{{ $answered_count }}">
                                                 <input type="hidden" name="timer_left" id="timer-left">
                                                 @if($questions->count() > 1)
-                                                <div class="text-md-right">
+                                                <divq class="d-flex justify-content-between mb-2">
+                                                    <div>
+                                                    <div class="questtions-label page-heading">Online Test</div>
+                                                    <div class="un-answered">You have <span>x</span> unanswered questions</div>
+                                                    </div>
+
                                                     <button class="w-md-auto exit-btn btn btn-outline-danger btn-rounded m-0 mb-2 btn-sm-block waves-effect z-depth-0"
                                                             type="submit" name="save" value="save">SAVE & EXIT
                                                     </button>
-                                                </div>
+                                                </divq>
                                                 @endif
+                                                 <br>
 
                                                 @foreach($questions as $key => $set)
                                                     <div class="question-answer {{ $key == 0  ? 'active' : ''}}" id="question-{{ $set->id }}">
                                                         <div class="question">{!! $set->question !!}</div>
+                                                        <br>
                                                         <input type="hidden" class="question-input" name="question_id[]"
                                                                value="{{ $set->id }}">
                                                         <div class="options mt-2">
@@ -65,7 +70,7 @@
                                                                 shuffle($option_keys);
                                                             @endphp
                                                             @foreach($option_keys as $option_key)
-                                                                <div class="custom-control custom-radio my-2">
+                                                                <div class="custom-control custom-radio my-3">
                                                                     <input type="radio"
                                                                            class="custom-control-input option {{ $option_key }}"
                                                                            name="option_{{ $set->id }}"
@@ -259,8 +264,14 @@
                     count += jQuery(val).find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
                 });
                 count += $currentItem.find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
+                var unanswered = 0;
                 if(count >0) {
-                    jQuery('.un-answered span').text(count);
+                    if(count > 1){
+                        unanswered = 'You have ' +count+ ' unanswered questions';
+                    }else{
+                        unanswered = 'You have ' +count+ ' unanswered question';
+                    }
+                    jQuery('.un-answered').text(unanswered);
                     jQuery('.un-answered').show();
                 }else{
                     jQuery('.un-answered').hide();
@@ -312,8 +323,14 @@
                 $prevQuestion.each(function(ind, val){
                     count += jQuery(val).find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
                 });
+                var unanswered = 0;
                 if(count >0) {
-                    jQuery('.un-answered span').text(count);
+                    if(count > 1){
+                        unanswered = 'You have ' +count+ ' unanswered questions';
+                    }else{
+                        unanswered = 'You have ' +count+ ' unanswered question';
+                    }
+                    jQuery('.un-answered').text(unanswered);
                     jQuery('.un-answered').show();
                 }else{
                     jQuery('.un-answered').hide();
@@ -457,8 +474,14 @@
                     count += jQuery(val).find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
                 });
                 count += $currentItem.find('.options .custom-control-input:checked').length == 0 ? 1 : 0;
+                var unanswered = 0;
                 if(count >0) {
-                    jQuery('.un-answered span').text(count);
+                    if(count > 1){
+                        unanswered = 'You have ' +count+ ' unanswered questions';
+                    }else{
+                        unanswered = 'You have ' +count+ ' unanswered question';
+                    }
+                    jQuery('.un-answered').text(unanswered);
                     jQuery('.un-answered').show();
                 }else{
                     jQuery('.un-answered').hide();

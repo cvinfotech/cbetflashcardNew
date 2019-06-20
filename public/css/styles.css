@@ -132,6 +132,7 @@ ul.side-nav.list-group li.list-group-item:hover {
     text-align: center;
     transition: transform 0.6s;
     -webkit-transition: transform 0.6s;
+    -ms-transition: transform 0.6s;
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
@@ -146,9 +147,12 @@ ul.side-nav.list-group li.list-group-item:hover {
     height: 100%;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
     -webkit-transition: 0.6s;
+    -ms-transition: 0.6s;
     transition: 0.6s;
     -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
 
@@ -158,6 +162,7 @@ ul.side-nav.list-group li.list-group-item:hover {
     text-align: center;
     z-index: 2;
     -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
     transform: rotateY(0deg);
     display: flex;
     flex-direction: column;
@@ -169,6 +174,7 @@ ul.side-nav.list-group li.list-group-item:hover {
     background-color: #4dccbd;
     color: white;
     -webkit-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
     z-index: 1;
     display: flex;
@@ -176,7 +182,10 @@ ul.side-nav.list-group li.list-group-item:hover {
     padding: 15px;
     justify-content: space-between;
 }
-
+.flip-card.active .flip-card-inner .flip-card-back{
+    z-index: 10;
+    -ms-backface-visibility: visible;
+}
 .topic_cards .carousel a.carousel-control-prev,a.carousel-control-next {
     display: none;
 }
@@ -224,6 +233,7 @@ header.header .site-title {
 }
 .md-form select.form-control{
     -webkit-appearance: none;
+    -ms-appearance: none;
     -moz-appearance: none;
     text-indent: 1px;
     text-overflow: '';
@@ -396,6 +406,7 @@ tr.danger {
 }
 .custom-switch .custom-control-input:checked~.custom-control-label::after {
     -webkit-transform: translateX(1rem);
+    -ms-transform: translateX(1rem);
     transform: translateX(1rem);
 }
 .custom-switch .custom-control-label::after{
@@ -460,6 +471,7 @@ a.navbar-brand img {
 }
 .navbar{
     -webkit-box-shadow: none;
+    -ms-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
 }
@@ -479,8 +491,17 @@ img.payment-method-img.paypal {
     display: block;
     margin: 0 auto!important;
 }
+.startyour {
+    font-size: 20px;
+    color: #fff!important;
+    background: #ffc107;
+    text-align: center;
+}
 img.credit-card {
     margin: 1rem;
+}
+label.custom-control-label.strike + .alert.alert-danger {
+    display: none;
 }
 @media only screen and (min-width: 1025px) {
     table.test-questions  {

@@ -476,6 +476,12 @@ class DashboardController extends Controller
         }
     }
 
+    public function deleteTest($test_id){
+       $test_history = TestHistory::where('test_id', $test_id)->delete();
+        $test_report = TestReport::where('test_id', $test_id)->delete();
+        return back()->with('success', 'Successfully deleted');
+    }
+
     public function submitTest(Request $request)
     {
 
@@ -555,14 +561,14 @@ class DashboardController extends Controller
 
         $correct = $test_history->score;
         $result = $test_history->result;
-
+        $test_type = $test_history->test_type;
         if ($test_history->test_type == 'practice') {
             $categories = Category::selectRaw('categories.*, (SELECT count(cat_id) as count FROM test_reports WHERE cat_id = categories.id AND test_id = ' . $test_id . ' AND chosen = correct GROUP BY cat_id) as count, (SELECT count(cat_id) as count FROM test_reports WHERE cat_id = categories.id AND test_id = ' . $test_id . ' GROUP BY cat_id) as total')->get();
         } elseif ($test_history->test_type == 'quiz') {
             $categories = Category::selectRaw('categories.*, (SELECT count(cat_id) as count FROM test_reports WHERE cat_id = categories.id AND test_id = ' . $test_id . ' AND chosen = correct GROUP BY cat_id) as count, (SELECT count(cat_id) as count FROM test_reports WHERE cat_id = categories.id AND test_id = ' . $test_id . ' GROUP BY cat_id) as total')->where('id', $test_history->cat_id)->get();
         }
 
-        return view('your-score', compact('correct', 'total', 'average_duration', 'average_time', 'result', 'categories', 'test_id'));
+        return view('your-score', compact('correct', 'total', 'average_duration', 'average_time', 'result', 'categories', 'test_id', 'test_type'));
     }
 
     public function reportCard($test_id)
@@ -576,7 +582,7 @@ class DashboardController extends Controller
     public function testResults()
     {
         $test_results = TestHistory::where('user_id', Auth::id())->where('test_type', 'practice')->where('status', 'completed')->paginate(10);
-        $line_graph = TestHistory::selectRaw('DATE_FORMAT(created_at, "%d %b") AS test_date, (SELECT COUNT(*) FROM `test_reports` WHERE test_id = test_histories.test_id AND chosen = correct) as correct')
+        $line_graph = TestHistory::selectRaw('DATE_FORMAT(created_at, "%b %d") AS test_date, (SELECT COUNT(*) FROM `test_reports` WHERE test_id = test_histories.test_id AND chosen = correct) as correct')
             ->where('user_id', Auth::id())->where('test_type', 'practice')->where('status', 'completed')->get();
 
 

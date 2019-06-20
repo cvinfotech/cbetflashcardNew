@@ -34,8 +34,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <a class="startyour d-block w-auto p-2 mt-4" href="{{ route('register') }}">Try before you buy! Get a 7 day free trial with any plan</a>
                 <!-- Material form login -->
-                <div class="card mt-5">
+                <div class="card mt-3">
 
                     <div class="card-header theme-color white-text text-center py-4">
                         <h1 class="text-uppercase font-weight-bold">Register</h1>

@@ -69,8 +69,8 @@
                                     </div>
                                     <label for="category">Option 1</label>
                                     <div class="md-form">
-                                        {{ Form::text('option1', isset($test_question) ? $test_question->option1 : '',
-                                        ['required' => 'required', 'class' => 'form-control'.($errors->has('option1') ? ' is-invalid' : ''), 'id' => 'option1', 'rows' => 3, 'placeholder' => 'Option 1']) }}
+                                        {{ Form::textarea('option1', isset($test_question) ? $test_question->option1 : '',
+                                        ['required' => 'required', 'class' => 'md-textarea form-control'.($errors->has('option1') ? ' is-invalid' : ''), 'id' => 'option1', 'rows' => 3, 'placeholder' => 'Option 1']) }}
                                         <i class="fas fa-arrow-left icon"></i>
                                         @if ($errors->has('option1'))
                                             <span class="invalid-feedback" role="alert">
@@ -91,8 +91,8 @@
                                     </div>
                                     <label for="category">Option 2</label>
                                     <div class="md-form">
-                                        {{ Form::text('option2', isset($test_question) ? $test_question->option2 : '',
-                                        ['required' => 'required', 'class' => 'form-control'.($errors->has('option2') ? ' is-invalid' : ''), 'id' => 'option2', 'rows' => 3, 'placeholder' => 'Option 2']) }}
+                                        {{ Form::textarea('option2', isset($test_question) ? $test_question->option2 : '',
+                                        ['required' => 'required', 'class' => 'md-textarea form-control'.($errors->has('option2') ? ' is-invalid' : ''), 'id' => 'option2', 'rows' => 3, 'placeholder' => 'Option 2']) }}
                                         <i class="fas fa-arrow-left icon"></i>
                                         @if ($errors->has('option2'))
                                             <span class="invalid-feedback" role="alert">
@@ -113,8 +113,8 @@
                                     </div>
                                     <label for="category">Option 3</label>
                                     <div class="md-form">
-                                        {{ Form::text('option3', isset($test_question) ? $test_question->option3 : '',
-                                        ['required' => 'required', 'class' => 'form-control'.($errors->has('option3') ? ' is-invalid' : ''), 'id' => 'option3', 'rows' => 3, 'placeholder' => 'Option 3']) }}
+                                        {{ Form::textarea('option3', isset($test_question) ? $test_question->option3 : '',
+                                        ['required' => 'required', 'class' => 'md-textarea form-control'.($errors->has('option3') ? ' is-invalid' : ''), 'id' => 'option3', 'rows' => 3, 'placeholder' => 'Option 3']) }}
                                         <i class="fas fa-arrow-left icon"></i>
                                         @if ($errors->has('option3'))
                                             <span class="invalid-feedback" role="alert">
@@ -135,8 +135,8 @@
                                     </div>
                                     <label for="category">Option 4</label>
                                     <div class="md-form">
-                                        {{ Form::text('option4', isset($test_question) ? $test_question->option4 : '',
-                                        ['required' => 'required', 'class' => 'form-control'.($errors->has('option4') ? ' is-invalid' : ''), 'id' => 'option4', 'placeholder' => 'Option 4']) }}
+                                        {{ Form::textarea('option4', isset($test_question) ? $test_question->option4 : '',
+                                        ['required' => 'required', 'class' => 'md-textarea form-control'.($errors->has('option4') ? ' is-invalid' : ''), 'id' => 'option4', 'placeholder' => 'Option 4']) }}
                                         <i class="fas fa-arrow-left icon"></i>
                                         @if ($errors->has('option4'))
                                             <span class="invalid-feedback" role="alert">

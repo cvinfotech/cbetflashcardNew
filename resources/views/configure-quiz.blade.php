@@ -176,6 +176,10 @@
                                                                    class=" ">
                                                                     Continue
                                                                 </a>
+                                                                <a href="{{ route('delete.test', $test_history->test_id)}}"
+                                                                   class="text-danger">
+                                                                    Delete
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

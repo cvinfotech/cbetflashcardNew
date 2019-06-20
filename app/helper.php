@@ -76,6 +76,7 @@ if(!function_exists('getCancelUrl')){
 
 if(!function_exists('getEndDate')){
     function getEndDate(){
+        $ends_at = date('Y-m-d');
         $user = Auth::user();
         if($user->payment_method == 'stripe') {
             if(strtotime($user->current_period_end) > time()) {
@@ -90,21 +91,25 @@ if(!function_exists('getEndDate')){
             if(strtotime($user->next_payment_date) > time()) {
                 $ends_at = Carbon::createFromTimeStamp(strtotime($user->next_payment_date))->format('d M, Y');
             }else{
-                if(config('paypal.settings.mode') == 'live'){
-                    $client_id = config('paypal.live_client_id');
-                    $secret = config('paypal.live_secret');
-                } else {
-                    $client_id = config('paypal.sandbox_client_id');
-                    $secret = config('paypal.sandbox_secret');
-                }
+                if($user->agreement_id) {
+                    if (config('paypal.settings.mode') == 'live') {
+                        $client_id = config('paypal.live_client_id');
+                        $secret = config('paypal.live_secret');
+                    } else {
+                        $client_id = config('paypal.sandbox_client_id');
+                        $secret = config('paypal.sandbox_secret');
+                    }
 
-                // Set the Paypal API Context/Credentials
-                $apiContext = new ApiContext(new OAuthTokenCredential($client_id, $secret));
-                $apiContext->setConfig(config('paypal.settings'));
-                $cancelAgreementDetails = Agreement::get($user->agreement_id, $apiContext);
-                $user->next_payment_date = Carbon::parse($cancelAgreementDetails->getAgreementDetails()->next_billing_date)->format('Y-m-d H:i:s');
-                $user->save();
-                $ends_at = $user->next_payment_date;
+                    // Set the Paypal API Context/Credentials
+                    $apiContext = new ApiContext(new OAuthTokenCredential($client_id, $secret));
+                    $apiContext->setConfig(config('paypal.settings'));
+                    $cancelAgreementDetails = Agreement::get($user->agreement_id, $apiContext);
+                    $user->next_payment_date = Carbon::parse($cancelAgreementDetails->getAgreementDetails()->next_billing_date)->format('Y-m-d H:i:s');
+                    $user->save();
+                    $ends_at = $user->next_payment_date;
+                }else{
+
+                }
             }
         }
 
